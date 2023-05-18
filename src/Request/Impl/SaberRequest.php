@@ -29,7 +29,7 @@ class SaberRequest extends Request
 
     public function get()
     {
-        $res = $this->client->get($this->generateQuery($this->url, $this->query), [
+        $res = $this->client->get($this->generateQuery(), [
             'headers' => $this->header,
         ]);
 
@@ -38,12 +38,8 @@ class SaberRequest extends Request
 
     public function post()
     {
-        $data = $this->form;
-        if ($this->json) {
-            $data = $this->json;
-        }
-
-        $res = $this->client->post($this->generateQuery($this->url, $this->query), $data, [
+        $data = $this->generatePostData();
+        $res = $this->client->post($this->generateQuery(), $data, [
             'headers' => $this->header,
         ]);
 
@@ -52,48 +48,98 @@ class SaberRequest extends Request
 
     public function delete()
     {
-        // TODO: Implement delete() method.
+        $data = $this->generatePostData();
+        $res = $this->client->delete($this->generateQuery(), [
+            'headers' => $this->header,
+            'data' => $data,
+        ]);
+
+        return $this->handleResponse($res);
     }
 
     public function put()
     {
-        // TODO: Implement put() method.
+        $data = $this->generatePostData();
+        $res = $this->client->put($this->generateQuery(), $data, [
+            'headers' => $this->header,
+        ]);
+
+        return $this->handleResponse($res);
     }
 
     public function patch()
     {
-        // TODO: Implement patch() method.
+        $data = $this->generatePostData();
+        $res = $this->client->patch($this->generateQuery(), $data, [
+            'headers' => $this->header,
+        ]);
+
+        return $this->handleResponse($res);
     }
 
     public function head()
     {
-        // TODO: Implement head() method.
+        $res = $this->client->head($this->generateQuery(), [
+            'headers' => $this->header,
+        ]);
+
+        return $this->handleResponse($res);
     }
 
     public function options()
     {
-        // TODO: Implement options() method.
-    }
+        $res = $this->client->options($this->generateQuery(), [
+            'headers' => $this->header,
+        ]);
 
-    public function generateQuery($url, $query)
-    {
-        if (!$query) {
-            return $url;
-        }
-
-        return $url . '?' . http_build_query($query);
+        return $this->handleResponse($res);
     }
 
     /**
+     * 生成带query的url
+     *
+     * @return mixed|string
+     * @author Guo Junxian
+     * Date 2023/5/18
+     */
+    public function generateQuery()
+    {
+        if (!$this->query) {
+            return $this->url;
+        }
+
+        return $this->url . '?' . http_build_query($this->query);
+    }
+
+    /**
+     * 生成post请求数据
+     *
+     * @return array|mixed
+     * @author Guo Junxian
+     * Date 2023/5/18
+     */
+    public function generatePostData() {
+        $data = $this->form;
+        if ($this->json) {
+            $data = $this->json;
+            $this->header['Content-Type'] = ContentType::JSON;
+        }
+        return $data;
+    }
+
+    /**
+     * 处理响应
      * @throws RequestException
      */
-    public function handleResponse($res) {
+    public function handleResponse(Saber\Response $res) {
         if (!$res->getSuccess()) {
-            throw new RequestException($res->exception);
+            // todo::这里没办法用原来的exception定位文件、line、trace等。
+            throw new RequestException($res->exception->getMessage());
         }
 
         $body = $res->getBody()->getContents();
-        if ($res->getHeader('Content-Type') === ContentType::JSON) {
+        $contentType = $res->getHeader('Content-Type')[0] ?? '';
+        if (stripos($contentType, ContentType::JSON) !== false) {
             $body = json_decode($body, true);
         }
         return $body;
