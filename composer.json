@@ -1,0 +1,15 @@
+{
+    "require": {
+        "swlib/saber": "~1.0.0",
+        "guzzlehttp/guzzle": "^6.3"
+    }
+    ,
+    "require-dev": {
+        "roave/security-advisories": "dev-latest"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stevennight\\FeishuCorpSdk\\": "src/"
+        }
+    }
+}
