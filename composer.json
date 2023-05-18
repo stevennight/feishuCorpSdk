@@ -15,10 +15,5 @@
         "psr-4": {
             "Stevennight\\FeishuCorpSdk\\": "src/"
         }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
     }
 }
