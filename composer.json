@@ -1,4 +1,8 @@
 {
+    "name": "stevennight/feishuCorpSdk",
+    "description": "feishu Corp Sdk",
+    "keywords": ["feishu"],
+    "homepage": "https://github.com/stevennight/feishuCorpSdk",
     "require": {
         "swlib/saber": "~1.0.0",
         "guzzlehttp/guzzle": "^6.3"
