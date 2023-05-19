@@ -7,7 +7,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
 class MessagesApi extends Api
 {
-    public $path = '/open-apis/auth/v3/tenant_access_token/internal';
+    public $path = '/open-apis/im/v1/messages';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
     public $receiveIdType;
