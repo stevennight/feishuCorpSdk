@@ -5,6 +5,7 @@ namespace Stevennight\FeishuCorpSdk;
 use Stevennight\FeishuCorpSdk\Api\Api;
 use Stevennight\FeishuCorpSdk\Api\OpenApis\Auth\V3\TenantAccessToken\Internal\TenantAccessTokenInternalApi;
 use Stevennight\FeishuCorpSdk\Exception\ResponseBusinessException;
+use Stevennight\FeishuCorpSdk\Request\Impl\GuzzleHttpRequest;
 use Stevennight\FeishuCorpSdk\Request\Request;
 
 class FeishuCropSdk
@@ -16,6 +17,7 @@ class FeishuCropSdk
     public function __construct($config)
     {
         $this->config = $config;
+        $this->httpClient = $config['httpClient'] ?? GuzzleHttpRequest::class;
     }
 
     /**
