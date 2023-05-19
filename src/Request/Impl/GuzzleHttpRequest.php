@@ -21,6 +21,7 @@ class GuzzleHttpRequest extends Request
         try {
             $res = $this->client->get($this->url, [
                 'query' => $this->query,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             // todo::这里没办法用原来的exception定位文件、line、trace等。
@@ -37,6 +38,7 @@ class GuzzleHttpRequest extends Request
                 'query' => $this->query,
                 'json' => $this->json,
                 'form_params' => $this->form,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             throw new RequestException($exception->getMessage());
@@ -52,6 +54,7 @@ class GuzzleHttpRequest extends Request
                 'query' => $this->query,
                 'json' => $this->json,
                 'form_params' => $this->form,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             throw new RequestException($exception->getMessage());
@@ -67,6 +70,7 @@ class GuzzleHttpRequest extends Request
                 'query' => $this->query,
                 'json' => $this->json,
                 'form_params' => $this->form,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             throw new RequestException($exception->getMessage());
@@ -82,6 +86,7 @@ class GuzzleHttpRequest extends Request
                 'query' => $this->query,
                 'json' => $this->json,
                 'form_params' => $this->form,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             throw new RequestException($exception->getMessage());
@@ -97,6 +102,7 @@ class GuzzleHttpRequest extends Request
                 'query' => $this->query,
                 'json' => $this->json,
                 'form_params' => $this->form,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             throw new RequestException($exception->getMessage());
@@ -113,6 +119,7 @@ class GuzzleHttpRequest extends Request
                 'query' => $this->query,
                 'json' => $this->json,
                 'form_params' => $this->form,
+                'headers' => $this->header,
             ]);
         } catch (Exception $exception) {
             throw new RequestException($exception->getMessage());
