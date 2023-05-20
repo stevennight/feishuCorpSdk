@@ -3,12 +3,12 @@
 namespace Stevennight\FeishuCorpSdk\Cache\Impl;
 
 use Stevennight\FeishuCorpSdk\Cache\Cache;
-use Swoft\Redis\Connection\Connection;
+use Swoft\Redis\Pool;
 
 class SwoftRedisCache extends Cache
 {
     /**
-     * @var Connection
+     * @var Pool
      */
     public $client;
 
