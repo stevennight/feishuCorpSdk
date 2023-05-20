@@ -1,12 +1,12 @@
 <?php
 
-namespace Stevennight\FeishuCorpSdk\Api\OpenApis\Contact\V3\Users\BatchGetId;
+namespace Stevennight\FeishuCorpSdk\Api\OpenApis\Contact\V3\Users;
 
 use Stevennight\FeishuCorpSdk\Api\Api;
 use Stevennight\FeishuCorpSdk\Enum\UserIdTypeEnum;
 use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
-class BatchGetIdApi extends Api
+class UsersBatchGetIdApi extends Api
 {
 
     /**
@@ -18,7 +18,9 @@ class BatchGetIdApi extends Api
     public $path = '/open-apis/contact/v3/users/batch_get_id';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
+    // Query 参数
     public $userIdType = UserIdTypeEnum::USER_ID_TYPE_USER_ID;  // 默认获取user_id
+    // 请求体参数
     public $emails = [];  // 批量邮箱，例：["zhangsan@z.com", "lisi@a.com"]
     public $mobiles = [];  //批量手机号，例：["13812345678", "13812345679"]
 
