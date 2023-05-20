@@ -4,11 +4,13 @@
     "keywords": ["feishu"],
     "homepage": "https://github.com/stevennight/feishuCorpSdk",
     "require": {
+        "ext-json": "*"
     },
     "require-dev": {
         "roave/security-advisories": "dev-latest",
         "swlib/saber": "~1.0.0",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "swoft/redis": "~2.0.0"
     },
     "autoload": {
         "psr-4": {
