@@ -34,10 +34,10 @@ class UsersDeleteApi extends Api
     public $emailAcceptor;  // 用户邮件资源处理方式
 
     // 路径追加userId参数
-    public function setUserIdToPath($userId)
+    public function getPath()
     {
-        $this->userId = $userId;
-        $this->path .= $userId;
+        $this->path .= $this->userId;
+        return $this->path;
     }
 
     public function getJson()
