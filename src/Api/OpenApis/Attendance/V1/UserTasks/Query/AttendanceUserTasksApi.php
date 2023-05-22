@@ -14,7 +14,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
  * @author Guo Junxian
  * Date 2023/05/20 17:09:11
  */
-class AttendanceUserTasks extends Api
+class AttendanceUserTasksApi extends Api
 {
     public $path = '/open-apis/attendance/v1/user_tasks/query';
     public $method = RequestMethod::REQUEST_METHOD_POST;
