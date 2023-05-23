@@ -16,4 +16,6 @@ class AttendanceResultEnum
     const LATE = 'Late';
     /** @var string 缺卡 */
     const LACK = 'Lack';
+    /** @var string 待打卡 */
+    const TODO = 'Todo';
 }
