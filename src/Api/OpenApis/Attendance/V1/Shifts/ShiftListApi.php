@@ -7,7 +7,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
 class ShiftListApi extends Api
 {
-    public $path = '/open-apis/attendance/v1/user_tasks/query';
+    public $path = '/open-apis/attendance/v1/shifts';
     public $method = RequestMethod::REQUEST_METHOD_GET;
     public $requestAccessToken = true;
 
