@@ -2,9 +2,10 @@
 
 namespace Stevennight\FeishuCorpSdk\Api\OpenApis\Attendance\V1\Shifts;
 
+use Stevennight\FeishuCorpSdk\Api\Api;
 use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
-class ShiftListApi
+class ShiftListApi extends Api
 {
     public $path = '/open-apis/attendance/v1/user_tasks/query';
     public $method = RequestMethod::REQUEST_METHOD_GET;
