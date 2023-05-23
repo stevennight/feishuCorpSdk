@@ -3,6 +3,8 @@
 namespace Stevennight\FeishuCorpSdk\Api\OpenApis\Contact\V3\Users;
 
 use Stevennight\FeishuCorpSdk\Api\Api;
+use Stevennight\FeishuCorpSdk\Enum\DepartmentIdTypeEnum;
+use Stevennight\FeishuCorpSdk\Enum\UserIdTypeEnum;
 use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
 class UsersCreateApi extends Api
@@ -18,8 +20,8 @@ class UsersCreateApi extends Api
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
     // Query 参数
-    public $userIdType;  // 用户ID类型
-    public $departmentIdType;  // 部门ID的类型
+    public $userIdType = UserIdTypeEnum::USER_ID_TYPE_USER_ID;  // 用户ID类型
+    public $departmentIdType = DepartmentIdTypeEnum::DEPARTMENT_ID_TYPE_DEPARTMENT_ID;  // 部门ID的类型
     public $clientToken;  // 幂等判断参数
     // 请求体参数
     public $userId;  //用户的user_id
