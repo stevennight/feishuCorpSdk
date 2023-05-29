@@ -14,6 +14,9 @@ class AttendanceResultEnum
     const EARLY = 'Early';
     /** @var string 迟到 */
     const LATE = 'Late';
+    /** @var string 严重迟到 */
+    const SERIOUS_LATE = 'SeriousLate';
+
     /** @var string 缺卡 */
     const LACK = 'Lack';
     /** @var string 待打卡 */
