@@ -31,6 +31,25 @@ abstract class Api
         return [];
     }
 
+    /**
+     * 文件上传
+     * 格式：
+     *  [
+     *      [
+     *          'fieldName' => '文件上传字段名称',
+     *          'filePath' => '文件路径',
+     *      ],
+     *  ]
+     *
+     * @return array
+     * @author Guo Junxian
+     * Date 2023/5/31
+     */
+    public function getFiles()
+    {
+        return [];
+    }
+
     public function getHeader()
     {
         return [];

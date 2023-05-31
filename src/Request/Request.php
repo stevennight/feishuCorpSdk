@@ -10,6 +10,7 @@ abstract class Request implements IRequest
     public $json = [];
     public $form = [];
     public $header = [];
+    public $files = [];
 
     abstract public function get();
 

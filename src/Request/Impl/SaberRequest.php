@@ -39,9 +39,8 @@ class SaberRequest extends Request
     public function post()
     {
         $data = $this->generatePostData();
-        $res = $this->client->post($this->generateQuery(), $data, [
-            'headers' => $this->header,
-        ]);
+
+        $res = $this->client->post($this->generateQuery(), $data['data'], $data['options']);
 
         return $this->handleResponse($res);
     }
@@ -49,10 +48,10 @@ class SaberRequest extends Request
     public function delete()
     {
         $data = $this->generatePostData();
-        $res = $this->client->delete($this->generateQuery(), [
-            'headers' => $this->header,
-            'data' => $data,
-        ]);
+        $options = $data['options'];
+        $options['data'] = $data['data'];
+
+        $res = $this->client->delete($this->generateQuery(), $options);
 
         return $this->handleResponse($res);
     }
@@ -60,9 +59,8 @@ class SaberRequest extends Request
     public function put()
     {
         $data = $this->generatePostData();
-        $res = $this->client->put($this->generateQuery(), $data, [
-            'headers' => $this->header,
-        ]);
+
+        $res = $this->client->put($this->generateQuery(), $data['data'], $data['options']);
 
         return $this->handleResponse($res);
     }
@@ -70,9 +68,8 @@ class SaberRequest extends Request
     public function patch()
     {
         $data = $this->generatePostData();
-        $res = $this->client->patch($this->generateQuery(), $data, [
-            'headers' => $this->header,
-        ]);
+
+        $res = $this->client->patch($this->generateQuery(), $data['data'], $data['options']);
 
         return $this->handleResponse($res);
     }
@@ -119,12 +116,27 @@ class SaberRequest extends Request
      * Date 2023/5/18
      */
     public function generatePostData() {
+        $options = [];
+
         $data = $this->form;
-        if ($this->json) {
+        if ($this->files) {
+            // 文件优先于json
+            foreach ($this->files as $file) {
+                $options['files'][$file['fieldName']] = $file['filePath'];
+            }
+        } elseif ($this->json) {
             $data = $this->json;
             $this->header['Content-Type'] = ContentType::JSON;
         }
-        return $data;
+
+        if ($this->header) {
+            $options['headers'] = $this->header;
+        }
+
+        return [
+            'data' => $data,
+            'options' => $options,
+        ];
     }
 
     /**

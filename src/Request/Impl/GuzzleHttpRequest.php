@@ -37,12 +37,8 @@ class GuzzleHttpRequest extends Request
     public function post()
     {
         try {
-            $res = $this->client->post($this->url, [
-                'query'       => $this->query,
-                'json'        => $this->json,
-                'form_params' => $this->form,
-                'headers'     => $this->header,
-            ]);
+            $data = $this->generateOptions();
+            $res = $this->client->post($this->url, $data);
         } catch (ClientException $exception) {
             $res = $exception->getResponse();
         } catch (Exception $exception) {
@@ -55,12 +51,8 @@ class GuzzleHttpRequest extends Request
     public function delete()
     {
         try {
-            $res = $this->client->delete($this->url, [
-                'query'       => $this->query,
-                'json'        => $this->json,
-                'form_params' => $this->form,
-                'headers'     => $this->header,
-            ]);
+            $data = $this->generateOptions();
+            $res = $this->client->delete($this->url, $data);
         } catch (ClientException $exception) {
             $res = $exception->getResponse();
         } catch (Exception $exception) {
@@ -73,12 +65,8 @@ class GuzzleHttpRequest extends Request
     public function put()
     {
         try {
-            $res = $this->client->put($this->url, [
-                'query'       => $this->query,
-                'json'        => $this->json,
-                'form_params' => $this->form,
-                'headers'     => $this->header,
-            ]);
+            $data = $this->generateOptions();
+            $res = $this->client->put($this->url, $data);
         } catch (ClientException $exception) {
             $res = $exception->getResponse();
         } catch (Exception $exception) {
@@ -91,12 +79,8 @@ class GuzzleHttpRequest extends Request
     public function patch()
     {
         try {
-            $res = $this->client->patch($this->url, [
-                'query'       => $this->query,
-                'json'        => $this->json,
-                'form_params' => $this->form,
-                'headers'     => $this->header,
-            ]);
+            $data = $this->generateOptions();
+            $res = $this->client->patch($this->url, $data);
         } catch (ClientException $exception) {
             $res = $exception->getResponse();
         } catch (Exception $exception) {
@@ -109,12 +93,8 @@ class GuzzleHttpRequest extends Request
     public function head()
     {
         try {
-            $res = $this->client->head($this->url, [
-                'query'       => $this->query,
-                'json'        => $this->json,
-                'form_params' => $this->form,
-                'headers'     => $this->header,
-            ]);
+            $data = $this->generateOptions();
+            $res = $this->client->head($this->url, $data);
         } catch (ClientException $exception) {
             $res = $exception->getResponse();
         } catch (Exception $exception) {
@@ -128,12 +108,8 @@ class GuzzleHttpRequest extends Request
     {
         // todo::不知道是否可用
         try {
-            $res = $this->client->options($this->url, [
-                'query'       => $this->query,
-                'json'        => $this->json,
-                'form_params' => $this->form,
-                'headers'     => $this->header,
-            ]);
+            $data = $this->generateOptions();
+            $res = $this->client->options($this->url, $data);
         } catch (ClientException $exception) {
             $res = $exception->getResponse();
         } catch (Exception $exception) {
@@ -141,6 +117,35 @@ class GuzzleHttpRequest extends Request
         }
 
         return $this->handleResponse($res);
+    }
+
+    public function generateOptions(): array
+    {
+        $data = [
+            'query'       => $this->query,
+            'headers'     => $this->header,
+        ];
+
+        if ($this->files) {
+            $data['multipart'] = [];
+            foreach ($this->form as $fieldName => $value) {
+                $data['multipart'][] = [
+                    'name' => $fieldName,
+                    'contents' => $value,
+                ];
+            }
+            foreach ($this->files as $value) {
+                $data['multipart'][] = [
+                    'name'     => $value['fieldName'],
+                    'contents' => fopen($value['filePath'], 'rb')
+                ];
+            }
+        } else {
+            $data['json'] = $this->json;
+            $data['form_params'] = $this->form;
+        }
+
+        return $data;
     }
 
     /**

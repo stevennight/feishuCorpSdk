@@ -51,6 +51,7 @@ class FeishuCropSdk
         $httpClient->query  = $api->getQuery();
         $httpClient->form   = $api->getForm();
         $httpClient->json   = $api->getJson();
+        $httpClient->files  = $api->getFiles();
         $httpClient->header = $headers;
         $api->beforeRequestHandler($httpClient);
         $res = $httpClient->{$api->method}();
