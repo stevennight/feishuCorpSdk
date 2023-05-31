@@ -7,7 +7,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
 class FileUploadApi extends Api
 {
-    public $path = '/im/v1/files';
+    public $path = '/open-apis/im/v1/files';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
 
