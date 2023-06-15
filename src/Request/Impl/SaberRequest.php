@@ -5,6 +5,7 @@ namespace Stevennight\FeishuCorpSdk\Request\Impl;
 use Stevennight\FeishuCorpSdk\Exception\RequestException;
 use Stevennight\FeishuCorpSdk\Request\Request;
 use Swlib\Http\ContentType;
+use Swlib\Http\Exception\ClientException;
 use Swlib\Http\Exception\HttpExceptionMask;
 use Swlib\Saber;
 
@@ -145,8 +146,11 @@ class SaberRequest extends Request
      */
     public function handleResponse(Saber\Response $res) {
         if (!$res->getSuccess()) {
-            // todo::这里没办法用原来的exception定位文件、line、trace等。
-            throw new RequestException($res->exception->getMessage());
+            if (
+                !$res->getException() instanceof ClientException
+            ) {
+                throw new RequestException($res->getException()->getMessage());
+            }
         }
 
         $body = $res->getBody()->getContents();
