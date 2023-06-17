@@ -60,7 +60,7 @@ class DepartmentPatchApi extends Api
         // 剔除空内容
         $json = [];
         foreach ($arr as $key => $value) {
-            if (!empty($value)) {
+            if ($value !== null) {
                 $json[$key] = $value;
             }
         }
