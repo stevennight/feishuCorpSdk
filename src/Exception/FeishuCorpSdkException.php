@@ -2,7 +2,7 @@
 
 namespace Stevennight\FeishuCorpSdk\Exception;
 
-class RequestException extends FeishuCorpSdkException
+class FeishuCorpSdkException extends \Exception
 {
 
 }

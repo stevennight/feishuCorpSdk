@@ -15,14 +15,24 @@ class FeishuCropSdk
     public $config = [];
     public $httpClient;
 
-    public $cacheClient;
+    public $cacheProxy;
+
+    public $cacheConnection;
+
+    /** @var null|Cache */
+    public $cacheProxyObj;
 
     public function __construct($config)
     {
         $this->config      = $config;
         $this->httpClient  = $config['httpClient'] ?? GuzzleHttpRequest::class;
-        $this->cacheClient = $config['cacheClient'] ?? null;
-        $this->cacheObj    = $config['cacheObj'] ?? null;
+        $this->cacheProxy = $config['cacheClient'] ?? null;
+        $this->cacheConnection    = $config['cacheObj'] ?? null;
+
+        // 有传入缓存代理类和缓存连接，则实例化缓存代理类
+        if ($this->cacheProxy && $this->cacheConnection) {
+            $this->cacheProxyObj = new $this->cacheProxy($this->cacheConnection);
+        }
     }
 
     /**
@@ -68,21 +78,16 @@ class FeishuCropSdk
      */
     public function getAccessToken(): string
     {
-        /** @var Cache|null $cache */
-        $cache = null;
         $token = '';
-        if ($this->cacheClient) {
-            $cache = new $this->cacheClient($this->cacheObj);
-        }
 
         $api            = new TenantAccessTokenInternalApi();
         $api->appId     = $this->config['appId'] ?? '';
         $api->appSecret = $this->config['appSecret'] ?? '';
 
-        // 从token拿
+        // 从缓存拿
         $key = 'feishuCorpSdk:cache:accessToken:' . $api->appId;
-        if ($cache) {
-            $token = $cache->get($key);
+        if ($this->cacheProxyObj) {
+            $token = $this->cacheProxyObj->get($key);
         }
 
         if ($token) {
@@ -94,9 +99,9 @@ class FeishuCropSdk
         $token    = $response['tenant_access_token'] ?? '';
 
         // 如果token获取成功，则保存到缓存
-        if ($token && $cache) {
+        if ($token && $this->cacheProxyObj) {
             $expire = $response['expire'] ?? 0;
-            $cache->set($key, $token, $expire - 300);
+            $this->cacheProxyObj->set($key, $token, $expire - 300);
         }
 
         return $token;

@@ -20,4 +20,9 @@ class JssdkTicketGetApi extends Api
     public $path = '/open-apis/jssdk/ticket/get';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
+
+    public function getJson()
+    {
+        return parent::getJson();
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace Stevennight\FeishuCorpSdk\Exception;
 
-class ResponseBusinessException extends \Exception
+class ResponseBusinessException extends FeishuCorpSdkException
 {
 
 }
