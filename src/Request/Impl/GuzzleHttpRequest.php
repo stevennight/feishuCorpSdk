@@ -121,10 +121,14 @@ class GuzzleHttpRequest extends Request
 
     public function generateOptions(): array
     {
-        $data = [
-            'query'       => $this->query,
-            'headers'     => $this->header,
-        ];
+        $data = [];
+
+        if ($this->query) {
+            $data['query'] = $this->query;
+        }
+        if ($this->header) {
+            $data['headers'] = $this->header;
+        }
 
         if ($this->files) {
             $data['multipart'] = [];
@@ -141,8 +145,12 @@ class GuzzleHttpRequest extends Request
                 ];
             }
         } else {
-            $data['json'] = $this->json;
-            $data['form_params'] = $this->form;
+            if ($this->json) {
+                $data['json'] = $this->json;
+            }
+            if ($this->form) {
+                $data['form_params'] = $this->form;
+            }
         }
 
         return $data;
