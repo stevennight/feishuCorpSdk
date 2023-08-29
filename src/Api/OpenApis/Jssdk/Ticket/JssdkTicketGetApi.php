@@ -10,7 +10,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
  *
  * JssdkTicketGetApi
  *
- * https://open.feishu.cn/document/ukTMukTMukTM/uYTM5UjL2ETO14iNxkTN/h5_js_sdk/authorization\
+ * https://open.feishu.cn/document/ukTMukTMukTM/uYTM5UjL2ETO14iNxkTN/h5_js_sdk/authorization
  *
  * @author Guo Junxian
  * @date 2023/8/29
