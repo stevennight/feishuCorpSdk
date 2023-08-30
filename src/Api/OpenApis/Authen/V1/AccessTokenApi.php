@@ -20,7 +20,7 @@ class AccessTokenApi extends Api
     public $path = '/open-apis/authen/v1/access_token';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
-    public $grantType = 'grant_type';
+    public $grantType = 'authorization_code';
     public $code = '';
 
     public function getJson()
