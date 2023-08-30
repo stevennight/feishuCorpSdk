@@ -52,9 +52,9 @@ class JssdkConfigService
         $signature = sha1($verifyStr);
 
         $config = [
-            "appid" => $this->appId,
+            "appId" => $this->appId,
             "signature" => $signature,
-            "noncestr" => $noncestr,
+            "nonceStr" => $noncestr,
             "timestamp" => $timestamp
         ];
 
