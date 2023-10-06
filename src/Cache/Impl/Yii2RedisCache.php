@@ -16,7 +16,7 @@ class Yii2RedisCache extends Cache
     {
         $res = $this->client->get($key);
 
-        if ($res === false) {
+        if (!$res) {
             return $default;
         }
 
