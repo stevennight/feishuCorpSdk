@@ -7,7 +7,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
 class BatchCreate extends Api
 {
-    public $path = 'https://open.feishu.cn/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_create';
+    public $path = '/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_create';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
 

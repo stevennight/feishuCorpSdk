@@ -7,7 +7,7 @@ use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
 class BatchUpdate extends Api
 {
-    public $path = 'https://open.feishu.cn/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_update';
+    public $path = '/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_update';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
 
