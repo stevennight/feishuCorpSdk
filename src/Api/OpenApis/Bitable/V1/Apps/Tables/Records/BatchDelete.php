@@ -5,23 +5,18 @@ namespace Stevennight\FeishuCorpSdk\Api\OpenApis\Bitable\V1\Apps\Tables\Records;
 use Stevennight\FeishuCorpSdk\Api\Api;
 use Stevennight\FeishuCorpSdk\Request\RequestMethod;
 
-class BatchCreate extends Api
+class BatchDelete extends Api
 {
-    public $path = 'https://open.feishu.cn/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_create';
+    public $path = 'https://open.feishu.cn/open-apis/bitable/v1/apps/{app_token}/tables/{table_id}/records/batch_delete';
     public $method = RequestMethod::REQUEST_METHOD_POST;
     public $requestAccessToken = true;
 
     public $app_token = '';
     public $table_id = '';
     /**
-     * @var array{
-     *     fields: array
-     * }
+     * @var string[]
      */
     public $records = [];
-
-    public $user_id_type;
-    public $client_token;
 
     public function getPath()
     {
@@ -34,18 +29,6 @@ class BatchCreate extends Api
             $this->app_token,
             $this->table_id
         ], $path);
-    }
-
-    public function getQuery()
-    {
-        $query = [];
-        if ($this->user_id_type) {
-            $query['user_id_type'] = $this->user_id_type;
-        }
-        if ($this->client_token) {
-            $query['client_token'] = $this->client_token;
-        }
-        return $query;
     }
 
     public function getJson()
