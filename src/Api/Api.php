@@ -11,6 +11,13 @@ abstract class Api
     public $method;
     public $requestAccessToken = true;
 
+    /**
+     * 响应中业务返回异常（code != 0），是否抛出ResponseBusinessException异常
+     *
+     * @var bool
+     */
+    public $responseBusinessException = true;
+
     public function getPath()
     {
         return $this->path;
@@ -63,8 +70,8 @@ abstract class Api
     public function afterRequestHandler($response)
     {
         $response['code'] = $response['code'] ?? null;
-        if ($response['code'] !== 0) {
-            throw new ResponseBusinessException($response['msg'] ?? '未知异常');
+        if ($this->responseBusinessException && $response['code'] !== 0) {
+            throw new ResponseBusinessException($response['msg'] ?? '未知异常', (int) $response['code']);
         }
 
         return $response;
