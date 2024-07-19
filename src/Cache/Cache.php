@@ -6,9 +6,12 @@ abstract class Cache
 {
     public $client;
 
-    public function __construct($client)
+    public $prefix;
+
+    public function __construct($client, $prefix = '')
     {
         $this->client = $client;
+        $this->prefix = $prefix;
     }
 
     abstract public function get($key, $default = '');

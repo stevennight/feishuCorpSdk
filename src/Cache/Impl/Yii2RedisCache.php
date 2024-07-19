@@ -12,8 +12,12 @@ class Yii2RedisCache extends Cache
      */
     public $client;
 
+    public $prefix;
+
     public function get($key, $default = '')
     {
+        $key = $this->getKey($key);
+
         $res = $this->client->get($key);
 
         if (!$res) {
@@ -36,9 +40,16 @@ class Yii2RedisCache extends Cache
 
     public function set($key, $value, $ttl)
     {
+        $key = $this->getKey($key);
+
         $this->client->set($key, json_encode([
             'value' => $value,
             'ttl' => time() + $ttl
         ]));
+    }
+
+    protected function getKey($key): string
+    {
+        return $this->prefix . $key;
     }
 }

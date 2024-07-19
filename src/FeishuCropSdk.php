@@ -15,9 +15,12 @@ class FeishuCropSdk
     public $config = [];
     public $httpClient;
 
+    /** @var Cache|null */
     public $cacheProxy;
 
     public $cacheConnection;
+
+    public $cachePrefix = '';
 
     /** @var null|Cache */
     public $cacheProxyObj;
@@ -31,7 +34,7 @@ class FeishuCropSdk
 
         // 有传入缓存代理类和缓存连接，则实例化缓存代理类
         if ($this->cacheProxy && $this->cacheConnection) {
-            $this->cacheProxyObj = new $this->cacheProxy($this->cacheConnection);
+            $this->cacheProxyObj = new $this->cacheProxy($this->cacheConnection, $this->cachePrefix ?: '');
         }
     }
 
